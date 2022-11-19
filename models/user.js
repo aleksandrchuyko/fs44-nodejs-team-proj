@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const Joi = require("joi");
+/* const Joi = require("joi"); */
 
 const userSchema = new Schema({
   email: {
@@ -12,4 +12,16 @@ const userSchema = new Schema({
     type: String,
     required: [true, "Password is required"],
   },
+  firstName: {
+    type: String,
+    required: [true, "First name is required"],
+  },
+  token: {
+    type: String,
+    default: "",
+  },
 });
+
+const User = model("user", userSchema);
+
+module.exports = User;
