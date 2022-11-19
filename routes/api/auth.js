@@ -12,11 +12,11 @@ router.post(
   ctlrWrapper(ctrl.register)
 );
 
-/* router.post(
+router.post(
   "/login",
   validateBody(schemas.loginSchema),
   ctlrWrapper(ctrl.login)
-); */
+);
 
 /* router.get("/current", authenticate, ctlrWrapper(ctrl.getCurrent));
 
