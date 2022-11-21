@@ -1,14 +1,14 @@
 const { RequestError } = require("../helpers");
 
-const validateBody = (schema) => {
-  const func = (req, res, next) => {
+const validateReqBody = (schema) => {
+  const wrap = (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
       next(RequestError(400, error.message));
     }
     next();
   };
-  return func;
+  return wrap;
 };
 
-module.exports = validateBody;
+module.exports = validateReqBody;
