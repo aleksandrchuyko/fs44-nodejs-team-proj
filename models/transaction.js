@@ -3,7 +3,6 @@ const Joi = require("joi");
 
 const { handleSaveErrors } = require("../helpers");
 
-
 const directions = ["income", "expense"];
 
 const transactionSchema = new Schema(
@@ -28,6 +27,10 @@ const transactionSchema = new Schema(
       type: String,
       required: true,
     },
+    balanceAfter: {
+      type: Number,
+      default: 1000.50,
+    },
     owner: {
       type: Schema.Types.ObjectId,
       ref: "user",
@@ -46,7 +49,6 @@ const addSchema = Joi.object({
   date: Joi.number().required(),
   category: Joi.string().required(),
   comment: Joi.string(),
-  
 });
 
 const schemas = {

@@ -1,4 +1,4 @@
-const { setNewCategory } = require("../../helpers");
+const setNewCategory  = require("./setNewCategory");
 const categories = [
   {
     category_id: "0",

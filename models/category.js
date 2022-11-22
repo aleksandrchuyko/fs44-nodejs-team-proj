@@ -1,7 +1,8 @@
 const { Schema, model } = require("mongoose");
-// const { handleSaveErrors } = require("../helpers");
+// const { handleMongoSaveError } = require('../utils/');
 
 // const { handleSaveErrors } = require("../helpers");
+const { handleSaveErrors } = require('../helpers/');
 
 const categorySchema = new Schema(
   {
@@ -18,7 +19,7 @@ const categorySchema = new Schema(
   { timestamps: true, versionKey: false }
 );
 
-// categorySchema.post("save", handleSaveErrors);
+categorySchema.post("save", handleSaveErrors);
 
 const Category = model("category", categorySchema);
 
