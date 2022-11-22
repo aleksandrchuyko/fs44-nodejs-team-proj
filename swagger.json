@@ -6,7 +6,7 @@
     "description": "Showing off swagger-ui-express"
     
   },
-  
+
   "consumes": ["application/json"],
   "produces": ["application/json"],
 
@@ -16,8 +16,13 @@
     {
       "name": "Auth",
       "description": "Authorization endpoints"
+    },
+     {
+      "name": "User",
+      "description": "Users endpoints"
     }
   ],
+
   "paths": {
     "/auth/register": {
       "post": {
