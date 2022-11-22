@@ -18,6 +18,7 @@ const userSchema = new Schema(
       type: String,
       required: [true, "First name is required"],
     },
+
     token: {
       type: String,
       default: null,
