@@ -15,4 +15,10 @@ router.post(
   ctrlWrapper(transactionsController.addNew)
 );
 
+router.post(
+  "/categories/",
+  authenticate,
+  ctrlWrapper(transactionsController.setCategories)
+);
+
 module.exports = router;
