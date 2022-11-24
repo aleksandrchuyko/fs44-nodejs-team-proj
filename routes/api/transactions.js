@@ -15,6 +15,12 @@ router.post(
   ctrlWrapper(transactionsController.addNew)
 );
 
+router.get(
+  "/",
+  authenticate,
+  ctrlWrapper(transactionsController.getTransactions)
+);
+
 router.post(
   "/categories/",
   authenticate,

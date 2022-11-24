@@ -30,7 +30,8 @@ const setCategories = (req, res) => {
   categories.forEach((element) => {
     setNewCategory(element);
   });
-  res.status(201).json({ message: "Completed" });
+
+  res.status(201).json({ message: "Completed!" });
 };
 
 module.exports = setCategories;
