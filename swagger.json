@@ -3,43 +3,37 @@
   "info": {
     "version": "2.0.2",
     "title": "Wallet API FSon44 Team 4",
-    "description": "Showing off swagger-ui-express"
-    
+    "description": "Project Team 4"
   },
-
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-
-  "servers": [{ "url": "http://localhost:3001" }],
-
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "servers": [
+    {
+      "url": "http://localhost:3001/api/"
+    }
+  ],
   "tags": [
     {
       "name": "Auth",
       "description": "Authorization endpoints"
     },
-     {
-      "name": "User",
-      "description": "Users endpoints"
-    },
-     {
+    {
       "name": "Transactions",
       "description": "Transactions endpoints"
     }
-
-
-
   ],
-
   "paths": {
     "/auth/register": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "User registration",
-
         "parameters": [],
-
-        
-
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -51,10 +45,9 @@
             }
           }
         },
-
         "responses": {
           "201": {
-            "description": "Successful operation",
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -71,17 +64,154 @@
             "description": "Email in use",
             "content": {}
           }
-          
         }
       }
-      
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "Login's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Email or password is wrong",
+            "content": {}
+          },
+          "409": {
+            "description": "Email in use",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/current": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Check current user",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentUserResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "User logout ",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Exit success",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
       "RegistrationRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": [
+          "email",
+          "password",
+          "name"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "userstest"
+          }
+        }
+      },
+      "RegistrationResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "userstest"
+          }
+        },
+        "example": {
+          "email": "1@gmail.com",
+          "name": "userstest"
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -95,27 +225,62 @@
           }
         }
       },
-      "RegistrationResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "User's token"
+          },
+          "user": {
+            "balance": {
+              "type": "integer",
+              "description": "User's balance",
+              "format": "email"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "userstest"
+            }
+          }
+        },
+        "example": {
+          "token": "121545sddd44",
+          "user": {
+            "name": "userstest",
+            "balance": "8989898"
+          }
+        }
+      },
+      "CurrentUserResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
             "email": {
               "type": "string",
               "description": "User's email",
               "format": "email"
             },
-            "userId": {
-              "type": "number",
-              "description": "User's id",
-              "example": "32143232436545474"
+            "balance": {
+              "type": "integer",
+              "description": "User's balance",
+              "format": "email"
+            },
+            "name": {
+              "type": "string",
+              "description": "User's name",
+              "example": "userstest"
             }
           }
         },
-        "example": [
-          { "email": "1@gmail.com", "userId": "1" },
-          { "email": "2@gmail.com", "userId": "2" }
-        ]
+        "example": {
+          "user": {
+            "email": "1@gmail.com",
+            "balance": "898988",
+            "name": "userstest"
+          }
+        }
       }
     },
     "securitySchemes": {
