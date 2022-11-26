@@ -16,7 +16,7 @@ const userSchema = new Schema(
     },
     name: {
       type: String,
-      required: [true, "First name is required"],
+      required: [true, "Name is required"],
     },
 
     balance: {
@@ -37,7 +37,6 @@ userSchema.post("save", handleSaveErrors);
 const registerSchema = Joi.object({
   email: Joi.string().required(),
   password: Joi.string().min(6).required(),
-  repeat_password: Joi.string().required().valid(Joi.ref("password")),
   name: Joi.string().required(),
 });
 
