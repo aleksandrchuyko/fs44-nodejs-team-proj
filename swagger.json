@@ -14,6 +14,9 @@
   "servers": [
     {
       "url": "http://localhost:3001/api/"
+    },
+    {
+      "url": "http://svetlya4ki.onrender.com/api/"
     }
   ],
   "tags": [
@@ -27,12 +30,12 @@
     }
   ],
   "paths": {
-    "/auth/register": {
+    "/auth/signup": {
       "post": {
         "tags": [
           "Auth"
         ],
-        "summary": "User registration",
+        "summary": "User signup",
         "parameters": [],
         "requestBody": {
           "description": "Registration's object",
@@ -40,7 +43,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegistrationRequest"
+                "$ref": "#/components/schemas/SignupRequest"
               }
             }
           }
@@ -51,7 +54,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationResponse"
+                  "$ref": "#/components/schemas/SignupResponse"
                 }
               }
             }
@@ -162,7 +165,7 @@
   },
   "components": {
     "schemas": {
-      "RegistrationRequest": {
+      "SignupRequest": {
         "type": "object",
         "required": [
           "email",
@@ -187,7 +190,7 @@
           }
         }
       },
-      "RegistrationResponse": {
+      "SignupResponse": {
         "type": "object",
         "properties": {
           "email": {
