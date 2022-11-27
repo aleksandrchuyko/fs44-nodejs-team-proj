@@ -27,6 +27,10 @@
     {
       "name": "Transactions",
       "description": "Transactions endpoints"
+    },
+    {
+      "name": "Categories",
+      "description": "Categories endpoints"
     }
   ],
   "paths": {
@@ -161,6 +165,167 @@
           }
         }
       }
+    },
+    "/": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Post a transaction",
+        "parameters": [],
+        "requestBody": {
+          "description": "Request body with session's id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTransactionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTransactionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Get transaction by user",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/categories/": {
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Post a categories",
+        "parameters": [],
+        "requestBody": {
+          "description": "Request body with session's id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTransactionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTransactionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Get a categories",
+        "parameters": [],
+        "requestBody": {
+          "description": "Request body with session's id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetCategoriesResponse"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTransactionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {}
+          }
+        }
+      }
     }
   },
   "components": {
@@ -283,6 +448,99 @@
             "balance": "898988",
             "name": "userstest"
           }
+        }
+      },
+      "PostTransactionsRequest": {
+        "type": "object",
+        "required": [
+          "direction",
+          "amount",
+          "date",
+          "category"
+        ],
+        "properties": {
+          "direction": {
+            "type": "string",
+            "description": "transaction type",
+            "format": "email"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "User's password",
+            "example": "qwerty123"
+          },
+          "date": {
+            "type": "string",
+            "description": "User's name",
+            "example": "userstest"
+          },
+          "category": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User comment for transaction",
+            "format": "email"
+          }
+        }
+      },
+      "PostTransactionsResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "userstest"
+          }
+        },
+        "example": {
+          "email": "1@gmail.com",
+          "name": "userstest"
+        }
+      },
+      "GetTransactionsResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "userstest"
+          }
+        },
+        "example": {
+          "email": "1@gmail.com",
+          "name": "userstest"
+        }
+      },
+      "GetCategoriesResponse": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "example": "userstest"
+          }
+        },
+        "example": {
+          "email": "1@gmail.com",
+          "name": "userstest"
         }
       }
     },
