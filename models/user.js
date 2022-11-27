@@ -34,7 +34,7 @@ const userSchema = new Schema(
 
 userSchema.post("save", handleSaveErrors);
 
-const registerSchema = Joi.object({
+const signupSchema = Joi.object({
   email: Joi.string().required(),
   password: Joi.string().min(6).required(),
   name: Joi.string().required(),
@@ -46,7 +46,7 @@ const loginSchema = Joi.object({
 });
 
 const schemas = {
-  registerSchema,
+  signupSchema,
   loginSchema,
 };
 

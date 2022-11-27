@@ -2,7 +2,7 @@ const { User } = require("../../models/user");
 const bcrypt = require("bcryptjs");
 const { RequestError } = require("../../helpers/index");
 
-const register = async (req, res) => {
+const signup = async (req, res) => {
   const { email, password, name } = req.body;
   const user = await User.findOne({ email });
   if (user) {
@@ -20,4 +20,4 @@ const register = async (req, res) => {
   });
 };
 
-module.exports = register;
+module.exports = signup;
