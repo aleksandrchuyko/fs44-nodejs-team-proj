@@ -1,7 +1,8 @@
 const { Category } = require("../../models/category");
 
 const getCategories = async (req, res) => {
-  const result = await Category.find({}, "-_id -createdAt -updatedAt");
+  let result = await Category.find({}, "-_id -createdAt -updatedAt");
+  result = result.sort((a, b) => +a.category_id - (+b.category_id));
   res.status(200).json({ data: result });
 };
 
