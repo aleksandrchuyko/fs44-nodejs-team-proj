@@ -24,13 +24,18 @@ router.get(
 router.post(
   "/categories/",
   authenticate,
-  ctrlWrapper(transactionsController.setCategories)
+  ctrlWrapper(transactionsController.setMockTransact)
 );
 
 router.get(
   "/categories/",
   authenticate,
   ctrlWrapper(transactionsController.getCategories)
+);
+router.get(
+  "/statistic/:year/:month/",
+  authenticate,
+  ctrlWrapper(transactionsController.getStatistic)
 );
 
 module.exports = router;
