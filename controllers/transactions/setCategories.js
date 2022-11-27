@@ -10,19 +10,35 @@ const categories = [
   },
   {
     category_id: "2",
-    name: "Food",
+    name: "Basic expenses",
   },
   {
     category_id: "3",
-    name: "Car",
+    name: "Products",
     },
   {
     category_id: "4",
-    name: "Hobby",
+    name: "Car",
     },
   {
     category_id: "5",
+    name: "Self care",
+  },
+  {
+    category_id: "6",
+    name: "Child care",
+  },
+  {
+    category_id: "7",
+    name: "Household products",
+  },
+  {
+    category_id: "8",
     name: "Education",
+  },
+  {
+    category_id: "9",
+    name: "Leisure",
   },
 ];
 
