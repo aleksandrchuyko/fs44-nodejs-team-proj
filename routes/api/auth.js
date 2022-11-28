@@ -15,7 +15,7 @@ router.post(
 router.post(
   "/login",
   validateReqBody(schemas.loginSchema),
-  ctrlWrapper(ctrl.login)
+  ctrlWrapper(ctrl.refreshToken)
 );
 
 router.post("/refresh", ctrlWrapper(ctrl.refreshToken));
