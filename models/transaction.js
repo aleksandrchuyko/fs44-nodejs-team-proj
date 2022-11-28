@@ -24,10 +24,10 @@ const transactionSchema = new Schema(
       type: String,
     },
     category: {
-      type: Schema.Types.String,
-      ref: "category",
-      // type: String,
-      // required: true,
+      // type: Schema.Types.String,
+      // ref: "category",
+      type: String,
+      required: true,
     },
     balanceAfter: {
       type: Number,
