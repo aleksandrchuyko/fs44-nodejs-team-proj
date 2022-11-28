@@ -10,15 +10,16 @@ const getTransactions = async (req, res) => {
   let result = await Transaction.find(queryParams, "-createdAt -updatedAt", {
     skip,
     limit,
-  }).sort({ date: -1 });
+  }).populate("category", "name").sort({ date: -1 });
   result = result.map((item) => {
+    console.log(item);
     return {
       direction: item.direction,
       amount: item.amount,
       date: item.date,
       formatedDate: new Date(item.date),
       comment: item.comment,
-      category: item.category,
+      category: item.category?.name,
       balanceAfter: item.balanceAfter,
     };
   });

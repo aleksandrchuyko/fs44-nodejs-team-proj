@@ -24,10 +24,8 @@ const transactionSchema = new Schema(
       type: String,
     },
     category: {
-      // type: Schema.Types.String,
-      // ref: "category",
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "category",
     },
     balanceAfter: {
       type: Number,
@@ -49,7 +47,7 @@ const addSchema = Joi.object({
   direction: Joi.string().required(),
   amount: Joi.number().required(),
   date: Joi.number().required(),
-  category: Joi.string().required(),
+  category: Joi.string(),
   comment: Joi.string(),
 });
 
