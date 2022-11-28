@@ -18,6 +18,8 @@ router.post(
   ctrlWrapper(ctrl.login)
 );
 
+router.post("/refresh", ctrlWrapper(ctrl.refreshToken));
+
 router.get("/current", authenticate, ctrlWrapper(ctrl.currentUser));
 
 router.get("/logout", authenticate, ctrlWrapper(ctrl.logout));
