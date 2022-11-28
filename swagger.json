@@ -206,7 +206,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -216,7 +216,7 @@
             }
           },
           "400": {
-            "description": "Bad request ",
+            "description": "Bad request (invalid request body)/No token provided ",
             "content": {}
           },
           "401": {
@@ -224,7 +224,7 @@
             "content": {}
           },
           "404": {
-            "description": "Page not found",
+            "description": "Invalid user / Invalid session",
             "content": {}
           }
         }
@@ -241,8 +241,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -252,7 +252,7 @@
             }
           },
           "400": {
-            "description": "Bad request ",
+            "description": "Bad request (invalid request body)/No token provided",
             "content": {}
           },
           "401": {
@@ -260,7 +260,7 @@
             "content": {}
           },
           "404": {
-            "description": "Page not found",
+            "description": "Invalid user / Invalid session",
             "content": {}
           }
         }
@@ -284,7 +284,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PostTransactionsRequest"
+                "$ref": "#/components/schemas/PostCategoriesRequest"
               }
             }
           }
@@ -437,15 +437,18 @@
             "example": "12121111121sssd11"
           },
           "user": {
-            "balance": {
-              "type": "integer",
-              "description": "User's balance",
-              "example": "887878"
-            },
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "userstest"
+            "type": "object",
+            "properties": {
+              "balance": {
+                "type": "integer",
+                "description": "User's balance",
+                "example": "887878"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "userstest"
+              }
             }
           }
         },
@@ -461,19 +464,24 @@
         "type": "object",
         "properties": {
           "user": {
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "balance": {
-              "type": "integer",
-              "description": "User's balance"
-            },
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "userstest"
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email",
+                "example": "1@gmail.com"
+              },
+              "balance": {
+                "type": "integer",
+                "description": "User's balance",
+                "example": "78744"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "userstest"
+              }
             }
           }
         },
@@ -562,6 +570,66 @@
         }
       },
       "GetTransactionsResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Transaction id",
+            "example": "1462e654c37db24cc7"
+          },
+          "direction": {
+            "type": "string",
+            "description": "Transaction type",
+            "example": "income"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Transaction amount ",
+            "example": "2012"
+          },
+          "date": {
+            "type": "string",
+            "description": "Transaction date",
+            "example": "2022.10.08"
+          },
+          "category": {
+            "type": "string",
+            "description": "Transaction category",
+            "example": "Food"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User comment for transaction",
+            "example": "Food so expensive "
+          },
+          "balanceAfter": {
+            "type": "integer",
+            "description": "User's balance",
+            "example": "2054"
+          },
+          "owner": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Owner id",
+                "example": "62e68c9aa0282191081ba3ec"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "example": "user@example.com"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "usertest"
+              }
+            }
+          }
+        }
+      },
+      "PostCategoriesRequest": {
         "type": "object",
         "properties": {
           "email": {
