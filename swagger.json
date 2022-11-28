@@ -31,6 +31,10 @@
     {
       "name": "Categories",
       "description": "Categories endpoints"
+    },
+    {
+      "name": "Statistic",
+      "description": "Statistic endpoints"
     }
   ],
   "paths": {
@@ -295,7 +299,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostTransactionsResponse"
+                  "$ref": "#/components/schemas/GetCategoriesResponse"
                 }
               }
             }
@@ -325,30 +329,19 @@
             "Bearer": []
           }
         ],
-        "requestBody": {
-          "description": "Request body with session's id",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetCategoriesResponse"
-              }
-            }
-          }
-        },
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PostTransactionsResponse"
+                  "$ref": "#/components/schemas/GetCategoriesResponse"
                 }
               }
             }
           },
           "400": {
-            "description": "Bad request ",
+            "description": "Bad request (invalid request body) / No token provided ",
             "content": {}
           },
           "401": {
@@ -356,7 +349,45 @@
             "content": {}
           },
           "404": {
-            "description": "Page not found",
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/statistic/:year/:month/": {
+      "get": {
+        "tags": [
+          "Statistic by period"
+        ],
+        "summary": "Get a statistic",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStatisticResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body) / No token provided ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
             "content": {}
           }
         }
@@ -632,39 +663,58 @@
       "PostCategoriesRequest": {
         "type": "object",
         "properties": {
-          "email": {
+          "_id": {
             "type": "string",
-            "description": "User's email",
-            "format": "email"
+            "description": "Category id",
+            "example": "4"
           },
           "name": {
             "type": "string",
-            "description": "User's name",
-            "example": "userstest"
+            "description": "Category",
+            "example": "Education"
           }
         },
         "example": {
-          "email": "1@gmail.com",
+          "_id": "4",
           "name": "userstest"
         }
       },
       "GetCategoriesResponse": {
         "type": "object",
         "properties": {
-          "email": {
+          "_id": {
             "type": "string",
-            "description": "User's email",
-            "format": "email"
+            "description": "Category id",
+            "example": "5"
           },
           "name": {
             "type": "string",
-            "description": "User's name",
-            "example": "userstest"
+            "description": "Category",
+            "example": "Food"
           }
         },
         "example": {
-          "email": "1@gmail.com",
-          "name": "userstest"
+          "_id": "2",
+          "name": "Food"
+        }
+      },
+      "GetStatisticResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Category id",
+            "example": "5"
+          },
+          "name": {
+            "type": "string",
+            "description": "Category",
+            "example": "Food"
+          }
+        },
+        "example": {
+          "_id": "2",
+          "name": "Food"
         }
       }
     },
