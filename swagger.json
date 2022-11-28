@@ -54,7 +54,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Successful registration",
             "content": {
               "application/json": {
                 "schema": {
@@ -81,6 +81,11 @@
         ],
         "summary": "User login",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Login's object",
           "required": true,
@@ -103,12 +108,12 @@
               }
             }
           },
-          "401": {
-            "description": "Email or password is wrong",
+          "400": {
+            "description": "Bad Request",
             "content": {}
           },
-          "409": {
-            "description": "Email in use",
+          "401": {
+            "description": "Email or password is wrong",
             "content": {}
           }
         }
@@ -121,6 +126,11 @@
         ],
         "summary": "Check current user",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -150,6 +160,11 @@
         ],
         "summary": "User logout ",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "204": {
             "description": "Exit success",
@@ -173,6 +188,11 @@
         ],
         "summary": "Post a transaction",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Request body with session's id",
           "required": true,
@@ -215,6 +235,11 @@
         ],
         "summary": "Get transaction by user",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created",
@@ -248,6 +273,11 @@
         ],
         "summary": "Post a categories",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Request body with session's id",
           "required": true,
@@ -290,6 +320,11 @@
         ],
         "summary": "Get a categories",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Request body with session's id",
           "required": true,
@@ -398,13 +433,14 @@
         "properties": {
           "token": {
             "type": "string",
-            "description": "User's token"
+            "description": "User's token",
+            "example": "12121111121sssd11"
           },
           "user": {
             "balance": {
               "type": "integer",
               "description": "User's balance",
-              "format": "email"
+              "example": "887878"
             },
             "name": {
               "type": "string",
@@ -416,8 +452,8 @@
         "example": {
           "token": "121545sddd44",
           "user": {
-            "name": "userstest",
-            "balance": "8989898"
+            "balance": "8989898",
+            "name": "userstest"
           }
         }
       },
@@ -432,8 +468,7 @@
             },
             "balance": {
               "type": "integer",
-              "description": "User's balance",
-              "format": "email"
+              "description": "User's balance"
             },
             "name": {
               "type": "string",
@@ -461,48 +496,69 @@
         "properties": {
           "direction": {
             "type": "string",
-            "description": "transaction type",
-            "format": "email"
+            "description": "Transaction type",
+            "example": "income"
           },
           "amount": {
             "type": "integer",
-            "description": "User's password",
-            "example": "qwerty123"
+            "description": "Transaction amount ",
+            "example": "2012"
           },
           "date": {
             "type": "string",
-            "description": "User's name",
-            "example": "userstest"
+            "description": "Transaction date",
+            "example": "2022.10.08"
           },
           "category": {
             "type": "string",
-            "description": "User's email",
-            "format": "email"
+            "description": "Transaction category",
+            "example": "Food"
           },
           "comment": {
             "type": "string",
             "description": "User comment for transaction",
-            "format": "email"
+            "example": "Food so expensive "
           }
         }
       },
       "PostTransactionsResponse": {
         "type": "object",
         "properties": {
-          "email": {
+          "direction": {
             "type": "string",
-            "description": "User's email",
-            "format": "email"
+            "description": "Transaction type",
+            "example": "income"
           },
-          "name": {
+          "amount": {
+            "type": "integer",
+            "description": "Transaction amount ",
+            "example": "2012"
+          },
+          "date": {
             "type": "string",
-            "description": "User's name",
-            "example": "userstest"
+            "description": "Transaction date",
+            "example": "2022.10.08"
+          },
+          "category": {
+            "type": "string",
+            "description": "Transaction category",
+            "example": "Food"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User comment for transaction",
+            "example": "Food so expensive "
+          },
+          "balanceAfter": {
+            "type": "integer",
+            "description": "User's balance",
+            "example": "2054"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner id",
+            "example": "62e68c9aa0282191081ba3ec"
           }
-        },
-        "example": {
-          "email": "1@gmail.com",
-          "name": "userstest"
         }
       },
       "GetTransactionsResponse": {
