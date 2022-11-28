@@ -33,13 +33,14 @@ const getStatistic = async (req, res) => {
     { $project: { _id: 0, category: "$_id", totalSum: "$totalSum" } },
   ]);
 
-  console.log(sumTotal);
+  
   const totalIncome = sumTotal.find((item) => item.direction === "income");
   const totalExpense = sumTotal.find((item) => item.direction === "expense");
   res.status(200).json({
     data: {
       totalIncome: totalIncome ? totalIncome.totalSum : 0,
       totalExpense: totalExpense ? totalExpense.totalSum : 0,
+      firstTransactionDate: 1581312087000,
       expenses: sumByCategories,
     },
   });

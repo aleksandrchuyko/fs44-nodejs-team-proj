@@ -24,6 +24,8 @@ const transactionSchema = new Schema(
       type: String,
     },
     category: {
+      // type: Schema.Types.String,
+      // ref: "category",
       type: String,
       required: true,
     },
