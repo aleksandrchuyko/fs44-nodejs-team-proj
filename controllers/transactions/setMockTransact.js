@@ -1,17 +1,19 @@
+const { Category } = require("../../models/category");
 const setNewMockTransact = require("./setNewMockTransact");
 
 const rndTm = (range) => Math.floor(Math.random() * range);
 
-const setMockTransact = (req, res) => {
-  
-  const year = 2022;
-  for (let i = 0; i < 1; i++) {
+const setMockTransact = async (req, res) => {
+  const categoriesArr = await Category.find({});
+  const year = 2021;
+  for (let i = 0; i < 100; i++) {
+    const index = (rndTm(8) + 1).toString();
     const item = {
-      direction: "income",
-      amount: (10000 * Math.random()).toFixed(2),
+      direction: "expense",
+      amount: (1000 * Math.random()).toFixed(2),
       date: new Date(
         year,
-        rndTm(10),
+        rndTm(11),
         rndTm(31),
         rndTm(24),
         rndTm(60),
@@ -19,7 +21,7 @@ const setMockTransact = (req, res) => {
       ).getTime(),
 
       // category: (rndTm(8) + 1).toString(),
-      category: "0",
+      category: categoriesArr[index]._id,
       comment: "Mocka income comment...",
       balanceAfter: (100000 * Math.random()).toFixed(2),
       owner: req.user._id,
