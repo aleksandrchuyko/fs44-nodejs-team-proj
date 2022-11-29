@@ -580,7 +580,7 @@
           "date": {
             "type": "string",
             "description": "Transaction date",
-            "example": "2022.10.08"
+            "example": "20221008"
           },
           "category": {
             "type": "string",
@@ -724,20 +724,34 @@
       "GetStatisticResponse": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Category id",
-            "example": "5"
-          },
-          "name": {
-            "type": "string",
-            "description": "Category",
-            "example": "Food"
+          "data": {
+            "type": "object",
+            "properties": {
+              "totalIncome": {
+                "type": "integer",
+                "description": "Total Income"
+              },
+              "totalExpense": {
+                "type": "integer",
+                "description": "Total Expense"
+              },
+              "firstTransactionDate": {
+                "type": "string",
+                "description": "Date"
+              },
+              "expenses": {
+                "type": "array"
+              }
+            }
           }
         },
         "example": {
-          "_id": "2",
-          "name": "Food"
+          "data": {
+            "totalIncome": "101",
+            "totalExpense": "1010",
+            "firstTransactionDate": "1581312087000",
+            "expenses": []
+          }
         }
       }
     },
