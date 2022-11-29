@@ -350,7 +350,22 @@
           "Statistic by period"
         ],
         "summary": "Get a statistic",
-        "parameters": [],
+        "parameters": [
+          {
+            "in": "paths",
+            "name": "year",
+            "required": "true",
+            "type": "string",
+            "description": "Year"
+          },
+          {
+            "in": "paths",
+            "name": "month",
+            "required": "true",
+            "type": "string",
+            "description": "Month"
+          }
+        ],
         "security": [
           {
             "Bearer": []
