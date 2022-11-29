@@ -185,7 +185,7 @@
         }
       }
     },
-    "/": {
+    "/transactions/": {
       "post": {
         "tags": [
           "Transactions"
@@ -270,7 +270,7 @@
         }
       }
     },
-    "/categories/": {
+    "/transactions/categories/": {
       "post": {
         "tags": [
           "Categories"
@@ -282,17 +282,6 @@
             "Bearer": []
           }
         ],
-        "requestBody": {
-          "description": "Request body with session's id",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PostCategoriesRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "201": {
             "description": "Created",
@@ -546,7 +535,7 @@
           "date": {
             "type": "string",
             "description": "Transaction date",
-            "example": "2022.10.08"
+            "example": "20221008"
           },
           "category": {
             "type": "string",
@@ -597,106 +586,100 @@
             "type": "string",
             "description": "Owner id",
             "example": "62e68c9aa0282191081ba3ec"
+          },
+          "_id": {
+            "type": "string",
+            "description": "Transaction id",
+            "example": "1462e654c37db24cc7"
           }
         }
       },
       "GetTransactionsResponse": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Transaction id",
-            "example": "1462e654c37db24cc7"
-          },
-          "direction": {
-            "type": "string",
-            "description": "Transaction type",
-            "example": "income"
-          },
-          "amount": {
-            "type": "integer",
-            "description": "Transaction amount ",
-            "example": "2012"
-          },
-          "date": {
-            "type": "string",
-            "description": "Transaction date",
-            "example": "2022.10.08"
-          },
-          "category": {
-            "type": "string",
-            "description": "Transaction category",
-            "example": "Food"
-          },
-          "comment": {
-            "type": "string",
-            "description": "User comment for transaction",
-            "example": "Food so expensive "
-          },
-          "balanceAfter": {
-            "type": "integer",
-            "description": "User's balance",
-            "example": "2054"
-          },
-          "owner": {
+          "data": {
             "type": "object",
             "properties": {
-              "_id": {
+              "direction": {
                 "type": "string",
-                "description": "Owner id",
-                "example": "62e68c9aa0282191081ba3ec"
+                "description": "Transaction type",
+                "example": "income"
               },
-              "email": {
-                "type": "string",
-                "description": "User's email",
-                "example": "user@example.com"
+              "amount": {
+                "type": "integer",
+                "description": "Transaction amount ",
+                "example": "2012"
               },
-              "name": {
+              "date": {
                 "type": "string",
-                "description": "User's name",
-                "example": "usertest"
+                "description": "Transaction date",
+                "example": "2022.10.08"
+              },
+              "formatedDate": {
+                "type": "string",
+                "description": "FormatedDate date",
+                "example": "1970-01-01T05: 37: 01.008Z"
+              },
+              "category": {
+                "type": "string",
+                "description": "Transaction category",
+                "example": "Food"
+              },
+              "comment": {
+                "type": "string",
+                "description": "User comment for transaction",
+                "example": "Food so expensive "
+              },
+              "balanceAfter": {
+                "type": "integer",
+                "description": "User's balance",
+                "example": "2054"
               }
             }
           }
-        }
-      },
-      "PostCategoriesRequest": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Category id",
-            "example": "4"
-          },
-          "name": {
-            "type": "string",
-            "description": "Category",
-            "example": "Education"
-          }
         },
-        "example": {
-          "_id": "4",
-          "name": "userstest"
-        }
+        "example": [
+          {
+            "_id": "1",
+            "name": "Cinema"
+          }
+        ]
       },
       "GetCategoriesResponse": {
-        "type": "object",
-        "properties": {
-          "_id": {
-            "type": "string",
-            "description": "Category id",
-            "example": "5"
-          },
-          "name": {
-            "type": "string",
-            "description": "Category",
-            "example": "Food"
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Category id",
+              "example": "5"
+            },
+            "name": {
+              "type": "string",
+              "description": "Category",
+              "example": "Food"
+            }
           }
         },
-        "example": {
-          "_id": "2",
-          "name": "Food"
-        }
+        "example": [
+          {
+            "_id": "1",
+            "name": "Cinema"
+          },
+          {
+            "_id": "2",
+            "name": "Food"
+          },
+          {
+            "_id": "3",
+            "name": "Theatre"
+          },
+          {
+            "_id": "4",
+            "name": "Car"
+          }
+        ]
       },
       "GetStatisticResponse": {
         "type": "object",
