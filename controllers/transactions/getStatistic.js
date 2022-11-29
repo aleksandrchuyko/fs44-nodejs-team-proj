@@ -1,3 +1,4 @@
+const { Category } = require("../../models/category");
 const { Transaction } = require("../../models/transaction");
 
 const getStatistic = async (req, res) => {
@@ -32,7 +33,7 @@ const getStatistic = async (req, res) => {
     { $group: { _id: "$category", totalSum: { $sum: "$amount" } } },
     { $project: { _id: 0, category: "$_id", totalSum: "$totalSum" } },
   ]);
-
+  await Category.populate(sumByCategories, {path: "category", select:  {_id: 0, category_id: 1, name: 1}});
   
   const totalIncome = sumTotal.find((item) => item.direction === "income");
   const totalExpense = sumTotal.find((item) => item.direction === "expense");
