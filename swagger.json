@@ -13,10 +13,10 @@
   ],
   "servers": [
     {
-      "url": "http://localhost:3001/api/"
+      "url": "http://localhost:3001/api"
     },
     {
-      "url": "http://svetlya4ki.onrender.com/api/"
+      "url": "http://svetlya4ki.onrender.com/api"
     }
   ],
   "tags": [
@@ -344,7 +344,7 @@
         }
       }
     },
-    "/statistic/:year/:month/": {
+    "/transactions/statistic/:year/:month/": {
       "get": {
         "tags": [
           "Statistic by period"
