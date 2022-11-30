@@ -12,8 +12,8 @@ const getTransactions = async (req, res) => {
     limit,
   }).populate("category", "name").sort({ date: -1 });
   result = result.map((item) => {
-    console.log(item);
     return {
+      id: item._id,
       direction: item.direction,
       amount: item.amount,
       date: item.date,
