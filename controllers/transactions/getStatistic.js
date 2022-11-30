@@ -37,7 +37,7 @@ const getStatistic = async (req, res) => {
   
   const firstTransaction = await Transaction.find({owner: req.user._id}).sort({ date: 1 }).limit(1);
 
-  const firstTransactionDate = firstTransaction[0].date;
+  const firstTransactionDate = firstTransaction[0]? firstTransaction[0].date: 0;
   
 
   const totalIncome = sumTotal.find((item) => item.direction === "income");
