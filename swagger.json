@@ -620,9 +620,9 @@
         }
       },
       "GetTransactionsResponse": {
-        "type": "object",
-        "properties": {
-          "data": {
+        "data": {
+          "type": "array",
+          "items": {
             "type": "object",
             "properties": {
               "direction": {
@@ -663,17 +663,28 @@
             }
           }
         },
-        "example": [
-          {
-            "direction": "income",
-            "amount": 2012,
-            "date": 20221008,
-            "formatedDate": "1970-01-01T05:37:01.008Z",
-            "comment": "Food so expensive ",
-            "category": "Other income",
-            "balanceAfter": 2012
-          }
-        ]
+        "example": {
+          "data": [
+            {
+              "direction": "income",
+              "amount": 2012,
+              "date": 20221008,
+              "formatedDate": "1970-01-01T05:37:01.008Z",
+              "comment": "Food so expensive ",
+              "category": "Other income",
+              "balanceAfter": 2012
+            },
+            {
+              "direction": "income",
+              "amount": 2015,
+              "date": 20221009,
+              "formatedDate": "1970-01-01T05:37:01.008Z",
+              "comment": "Food so expensive ",
+              "category": "Other income",
+              "balanceAfter": 2018
+            }
+          ]
+        }
       },
       "PostCategoriesResponse": {
         "type": "object",
