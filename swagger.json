@@ -13,10 +13,10 @@
   ],
   "servers": [
     {
-      "url": "http://localhost:3001/api/"
+      "url": "http://localhost:3001/api"
     },
     {
-      "url": "http://svetlya4ki.onrender.com/api/"
+      "url": "http://svetlya4ki.onrender.com/api"
     }
   ],
   "tags": [
@@ -27,6 +27,14 @@
     {
       "name": "Transactions",
       "description": "Transactions endpoints"
+    },
+    {
+      "name": "Categories",
+      "description": "Categories endpoints"
+    },
+    {
+      "name": "Statistic",
+      "description": "Statistic endpoints"
     }
   ],
   "paths": {
@@ -50,7 +58,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created",
+            "description": "Successful registration",
             "content": {
               "application/json": {
                 "schema": {
@@ -77,6 +85,11 @@
         ],
         "summary": "User login",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "requestBody": {
           "description": "Login's object",
           "required": true,
@@ -99,12 +112,12 @@
               }
             }
           },
-          "401": {
-            "description": "Email or password is wrong",
+          "400": {
+            "description": "Bad Request",
             "content": {}
           },
-          "409": {
-            "description": "Email in use",
+          "401": {
+            "description": "Email or password is wrong",
             "content": {}
           }
         }
@@ -117,6 +130,11 @@
         ],
         "summary": "Check current user",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -146,6 +164,11 @@
         ],
         "summary": "User logout ",
         "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
         "responses": {
           "204": {
             "description": "Exit success",
@@ -157,6 +180,218 @@
           },
           "500": {
             "description": "Server error",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/transactions/": {
+      "post": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Post a transaction",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "requestBody": {
+          "description": "Request body with session's id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostTransactionsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostTransactionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)/No token provided ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "summary": "Get transaction by user",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetTransactionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)/No token provided",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/transactions/categories/": {
+      "post": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Post a categories",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostCategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Page not found",
+            "content": {}
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Get a categories",
+        "parameters": [],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCategoriesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body) / No token provided ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/transactions/statistic/:year/:month/": {
+      "get": {
+        "tags": [
+          "Statistic by period"
+        ],
+        "summary": "Get a statistic",
+        "parameters": [
+          {
+            "in": "paths",
+            "name": "year",
+            "required": "true",
+            "type": "string",
+            "description": "Year"
+          },
+          {
+            "in": "paths",
+            "name": "month",
+            "required": "true",
+            "type": "string",
+            "description": "Month"
+          }
+        ],
+        "security": [
+          {
+            "Bearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetStatisticResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body) / No token provided ",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized user",
+            "content": {}
+          },
+          "404": {
+            "description": "Invalid user / Invalid session",
             "content": {}
           }
         }
@@ -233,26 +468,30 @@
         "properties": {
           "token": {
             "type": "string",
-            "description": "User's token"
+            "description": "User's token",
+            "example": "12121111121sssd11"
           },
           "user": {
-            "balance": {
-              "type": "integer",
-              "description": "User's balance",
-              "format": "email"
-            },
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "userstest"
+            "type": "object",
+            "properties": {
+              "balance": {
+                "type": "integer",
+                "description": "User's balance",
+                "example": "887878"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "userstest"
+              }
             }
           }
         },
         "example": {
           "token": "121545sddd44",
           "user": {
-            "name": "userstest",
-            "balance": "8989898"
+            "balance": "8989898",
+            "name": "userstest"
           }
         }
       },
@@ -260,20 +499,24 @@
         "type": "object",
         "properties": {
           "user": {
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            },
-            "balance": {
-              "type": "integer",
-              "description": "User's balance",
-              "format": "email"
-            },
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "example": "userstest"
+            "type": "object",
+            "properties": {
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email",
+                "example": "1@gmail.com"
+              },
+              "balance": {
+                "type": "integer",
+                "description": "User's balance",
+                "example": "78744"
+              },
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "example": "userstest"
+              }
             }
           }
         },
@@ -282,6 +525,243 @@
             "email": "1@gmail.com",
             "balance": "898988",
             "name": "userstest"
+          }
+        }
+      },
+      "PostTransactionsRequest": {
+        "type": "object",
+        "required": [
+          "direction",
+          "amount",
+          "date",
+          "category"
+        ],
+        "properties": {
+          "direction": {
+            "type": "string",
+            "description": "Transaction type",
+            "example": "income"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Transaction amount ",
+            "example": "2012"
+          },
+          "date": {
+            "type": "string",
+            "description": "Transaction date",
+            "example": "20221008"
+          },
+          "category": {
+            "type": "string",
+            "description": "Transaction category",
+            "example": "Food"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User comment for transaction",
+            "example": "Food so expensive "
+          }
+        }
+      },
+      "PostTransactionsResponse": {
+        "type": "object",
+        "properties": {
+          "direction": {
+            "type": "string",
+            "description": "Transaction type",
+            "example": "income"
+          },
+          "amount": {
+            "type": "integer",
+            "description": "Transaction amount ",
+            "example": "2012"
+          },
+          "date": {
+            "type": "string",
+            "description": "Transaction date",
+            "example": "20221008"
+          },
+          "category": {
+            "type": "string",
+            "description": "Transaction category",
+            "example": "Food"
+          },
+          "comment": {
+            "type": "string",
+            "description": "User comment for transaction",
+            "example": "Food so expensive "
+          },
+          "balanceAfter": {
+            "type": "integer",
+            "description": "User's balance",
+            "example": "2054"
+          },
+          "owner": {
+            "type": "string",
+            "description": "Owner id",
+            "example": "62e68c9aa0282191081ba3ec"
+          },
+          "_id": {
+            "type": "string",
+            "description": "Transaction id",
+            "example": "1462e654c37db24cc7"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Created date",
+            "example": "2022-11-29T08:14:59.398Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Update date",
+            "example": "2022-11-29T08:16:59.398Z"
+          }
+        }
+      },
+      "GetTransactionsResponse": {
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "direction": {
+                "type": "string",
+                "description": "Transaction type",
+                "example": "income"
+              },
+              "amount": {
+                "type": "integer",
+                "description": "Transaction amount ",
+                "example": "2012"
+              },
+              "date": {
+                "type": "string",
+                "description": "Transaction date",
+                "example": "2022.10.08"
+              },
+              "formatedDate": {
+                "type": "string",
+                "description": "FormatedDate date",
+                "example": "1970-01-01T05: 37: 01.008Z"
+              },
+              "category": {
+                "type": "string",
+                "description": "Transaction category",
+                "example": "Food"
+              },
+              "comment": {
+                "type": "string",
+                "description": "User comment for transaction",
+                "example": "Food so expensive "
+              },
+              "balanceAfter": {
+                "type": "integer",
+                "description": "User's balance",
+                "example": "2054"
+              }
+            }
+          }
+        },
+        "example": {
+          "data": [
+            {
+              "direction": "income",
+              "amount": 2012,
+              "date": 20221008,
+              "formatedDate": "1970-01-01T05:37:01.008Z",
+              "comment": "Food so expensive ",
+              "category": "Other income",
+              "balanceAfter": 2012
+            },
+            {
+              "direction": "income",
+              "amount": 2015,
+              "date": 20221009,
+              "formatedDate": "1970-01-01T05:37:01.008Z",
+              "comment": "Food so expensive ",
+              "category": "Other income",
+              "balanceAfter": 2018
+            }
+          ]
+        }
+      },
+      "PostCategoriesResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Date",
+            "example": "2020-04-20T04:52:00.000Z"
+          }
+        }
+      },
+      "GetCategoriesResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Category id",
+              "example": "5"
+            },
+            "name": {
+              "type": "string",
+              "description": "Category",
+              "example": "Food"
+            }
+          }
+        },
+        "example": [
+          {
+            "_id": "1",
+            "name": "Cinema"
+          },
+          {
+            "_id": "2",
+            "name": "Food"
+          },
+          {
+            "_id": "3",
+            "name": "Theatre"
+          },
+          {
+            "_id": "4",
+            "name": "Car"
+          }
+        ]
+      },
+      "GetStatisticResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "totalIncome": {
+                "type": "integer",
+                "description": "Total Income"
+              },
+              "totalExpense": {
+                "type": "integer",
+                "description": "Total Expense"
+              },
+              "firstTransactionDate": {
+                "type": "string",
+                "description": "Date"
+              },
+              "expenses": {
+                "type": "array"
+              }
+            }
+          }
+        },
+        "example": {
+          "data": {
+            "totalIncome": "101",
+            "totalExpense": "1010",
+            "firstTransactionDate": "1581312087000",
+            "expenses": []
           }
         }
       }
