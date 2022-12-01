@@ -37,7 +37,16 @@ const addNew = async (req, res) => {
       new: true,
     }
   );
-  res.status(201).json(result);
+  res.status(201).json({
+    id: result._id,
+    direction: result.direction,
+    amount: result.amount,
+    date: result.date,
+    formatedDate: new Date(result.date),
+    comment: result.comment,
+    category: category?.name,
+    balanceAfter: result.balanceAfter,
+  });
 };
 
 module.exports = addNew;
