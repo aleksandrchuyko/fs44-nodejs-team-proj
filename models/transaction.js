@@ -29,7 +29,7 @@ const transactionSchema = new Schema(
     },
     balanceAfter: {
       type: Number,
-      default: 1000.50,
+      default: 1000.5,
     },
     owner: {
       type: Schema.Types.ObjectId,
