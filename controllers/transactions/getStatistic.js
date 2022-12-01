@@ -33,12 +33,18 @@ const getStatistic = async (req, res) => {
     { $group: { _id: "$category", totalSum: { $sum: "$amount" } } },
     { $project: { _id: 0, category: "$_id", totalSum: "$totalSum" } },
   ]);
-  await Category.populate(sumByCategories, {path: "category", select:  {_id: 0, category_id: 1, name: 1}});
-  
-  const firstTransaction = await Transaction.find({owner: req.user._id}).sort({ date: 1 }).limit(1);
+  await Category.populate(sumByCategories, {
+    path: "category",
+    select: { _id: 0, category_id: 1, name: 1 },
+  });
 
-  const firstTransactionDate = firstTransaction[0]? firstTransaction[0].date: 0;
-  
+  const firstTransaction = await Transaction.find({ owner: req.user._id })
+    .sort({ date: 1 })
+    .limit(1);
+
+  const firstTransactionDate = firstTransaction[0]
+    ? firstTransaction[0].date
+    : 0;
 
   const totalIncome = sumTotal.find((item) => item.direction === "income");
   const totalExpense = sumTotal.find((item) => item.direction === "expense");
