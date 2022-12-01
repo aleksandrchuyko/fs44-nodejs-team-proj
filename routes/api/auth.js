@@ -9,7 +9,7 @@ const router = express.Router();
 router.post(
   "/signup",
   validateReqBody(schemas.signupSchema),
-  ctrlWrapper(ctrl.signup)
+  ctrlWrapper(ctrl.signupWithLogin)
 );
 
 router.post(

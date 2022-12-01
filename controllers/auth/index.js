@@ -1,10 +1,10 @@
-const signup = require("./signup");
+const signupWithLogin = require("./signupWithlogin");
 const login = require("./login");
 const logout = require("./logout");
 const currentUser = require("./currentUser");
 
 module.exports = {
-  signup,
+  signupWithLogin,
   login,
   logout,
   currentUser,
